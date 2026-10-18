@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '../auth/store/useAuthStore';
+import { useLanguageStore } from '../store/useLanguageStore';
+import { translations } from '../utils/translations';
 
 export const HomePage: React.FC = () => {
-  const { isAuthenticated, role } = useAuthStore();
-
-  const getDashboardPath = () => {
-    if (role === 'ROLE_PRINCIPAL' || role === 'PRINCIPAL') return '/principal/dashboard';
-    return '/teacher/dashboard';
-  };
+  const { isAuthenticated } = useAuthStore();
+  const { language } = useLanguageStore();
+  const t = translations[language];
 
   return (
     <div className="min-h-screen">
@@ -27,7 +26,7 @@ export const HomePage: React.FC = () => {
           </span>
 
           <h2 className="text-2xl md:text-4xl font-bold leading-relaxed tracking-wide drop-shadow-md text-white">
-            "ရောင်ခြည်သစ်တို့ စုဝေးရာ၊ အနာဂတ်ကို ပုံဖော်ရာ ပညာအိမ်"
+            "{t.schoolSlogan}"
           </h2>
 
           <div className="pt-2">
@@ -36,7 +35,7 @@ export const HomePage: React.FC = () => {
                 to="/login"
                 className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8 py-3 rounded-lg shadow-lg transition-all duration-300 inline-block text-base"
               >
-                Login to System
+                {t.loginToSystem}
               </Link>
             )}
           </div>
@@ -47,10 +46,10 @@ export const HomePage: React.FC = () => {
       <section className="max-w-6xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
-            School Activities Gallery
+            {t.galleryTitle}
           </h2>
           <p className="text-gray-600 text-base md:text-lg">
-            Photos and memories of student activities and school events
+            {t.gallerySub}
           </p>
           <div className="w-24 h-1 bg-emerald-600 mx-auto mt-4 rounded-full"></div>
         </div>
@@ -64,7 +63,7 @@ export const HomePage: React.FC = () => {
               <img src="http://localhost:8080/images/other/picture2.jpg" alt="Photo 1" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex items-center justify-between bg-white">
-              <span className="text-base font-semibold text-gray-800">School Activity (1)</span>
+              <span className="text-base font-semibold text-gray-800">{t.schoolActivity} (1)</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">#1</span>
             </div>
           </div>
@@ -75,7 +74,7 @@ export const HomePage: React.FC = () => {
               <img src="http://localhost:8080/images/other/picture3.jpg" alt="Photo 2" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex items-center justify-between bg-white">
-              <span className="text-base font-semibold text-gray-800">School Activity (2)</span>
+              <span className="text-base font-semibold text-gray-800">{t.schoolActivity} (2)</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">#2</span>
             </div>
           </div>
@@ -86,7 +85,7 @@ export const HomePage: React.FC = () => {
               <img src="http://localhost:8080/images/other/picture4.jpg" alt="Photo 3" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex items-center justify-between bg-white">
-              <span className="text-base font-semibold text-gray-800">School Activity (3)</span>
+              <span className="text-base font-semibold text-gray-800">{t.schoolActivity} (3)</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">#3</span>
             </div>
           </div>
@@ -97,7 +96,7 @@ export const HomePage: React.FC = () => {
               <img src="http://localhost:8080/images/other/picture5.jpg" alt="Photo 4" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex items-center justify-between bg-white">
-              <span className="text-base font-semibold text-gray-800">School Activity (4)</span>
+              <span className="text-base font-semibold text-gray-800">{t.schoolActivity} (4)</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">#4</span>
             </div>
           </div>
@@ -108,7 +107,7 @@ export const HomePage: React.FC = () => {
               <img src="http://localhost:8080/images/other/picture6.jpg" alt="Photo 5" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex items-center justify-between bg-white">
-              <span className="text-base font-semibold text-gray-800">School Activity (5)</span>
+              <span className="text-base font-semibold text-gray-800">{t.schoolActivity} (5)</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">#5</span>
             </div>
           </div>
@@ -119,7 +118,7 @@ export const HomePage: React.FC = () => {
               <img src="http://localhost:8080/images/other/picture7.jpg" alt="Photo 6" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex items-center justify-between bg-white">
-              <span className="text-base font-semibold text-gray-800">School Activity (6)</span>
+              <span className="text-base font-semibold text-gray-800">{t.schoolActivity} (6)</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">#6</span>
             </div>
           </div>
@@ -130,7 +129,7 @@ export const HomePage: React.FC = () => {
               <img src="http://localhost:8080/images/other/picture8.jpg" alt="Photo 7" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex items-center justify-between bg-white">
-              <span className="text-base font-semibold text-gray-800">School Activity (7)</span>
+              <span className="text-base font-semibold text-gray-800">{t.schoolActivity} (7)</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">#7</span>
             </div>
           </div>
@@ -141,7 +140,7 @@ export const HomePage: React.FC = () => {
               <img src="http://localhost:8080/images/other/picture9.jpg" alt="Photo 8" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex items-center justify-between bg-white">
-              <span className="text-base font-semibold text-gray-800">School Activity (8)</span>
+              <span className="text-base font-semibold text-gray-800">{t.schoolActivity} (8)</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">#8</span>
             </div>
           </div>
@@ -152,7 +151,7 @@ export const HomePage: React.FC = () => {
               <img src="http://localhost:8080/images/other/picture10.jpg" alt="Photo 9" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex items-center justify-between bg-white">
-              <span className="text-base font-semibold text-gray-800">School Activity (9)</span>
+              <span className="text-base font-semibold text-gray-800">{t.schoolActivity} (9)</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">#9</span>
             </div>
           </div>
@@ -163,7 +162,7 @@ export const HomePage: React.FC = () => {
               <img src="http://localhost:8080/images/other/picture11.jpg" alt="Photo 10" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex items-center justify-between bg-white">
-              <span className="text-base font-semibold text-gray-800">School Activity (10)</span>
+              <span className="text-base font-semibold text-gray-800">{t.schoolActivity} (10)</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">#10</span>
             </div>
           </div>
@@ -174,7 +173,7 @@ export const HomePage: React.FC = () => {
               <img src="http://localhost:8080/images/other/picture12.jpg" alt="Photo 11" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex items-center justify-between bg-white">
-              <span className="text-base font-semibold text-gray-800">School Activity (11)</span>
+              <span className="text-base font-semibold text-gray-800">{t.schoolActivity} (11)</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">#11</span>
             </div>
           </div>
@@ -185,7 +184,7 @@ export const HomePage: React.FC = () => {
               <img src="http://localhost:8080/images/other/picture13.jpg" alt="Photo 12" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex items-center justify-between bg-white">
-              <span className="text-base font-semibold text-gray-800">School Activity (12)</span>
+              <span className="text-base font-semibold text-gray-800">{t.schoolActivity} (12)</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">#12</span>
             </div>
           </div>
@@ -196,7 +195,7 @@ export const HomePage: React.FC = () => {
               <img src="http://localhost:8080/images/other/picture14.jpg" alt="Photo 13" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex items-center justify-between bg-white">
-              <span className="text-base font-semibold text-gray-800">School Activity (13)</span>
+              <span className="text-base font-semibold text-gray-800">{t.schoolActivity} (13)</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">#13</span>
             </div>
           </div>
@@ -207,7 +206,7 @@ export const HomePage: React.FC = () => {
               <img src="http://localhost:8080/images/other/picture15.jpg" alt="Photo 14" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex items-center justify-between bg-white">
-              <span className="text-base font-semibold text-gray-800">School Activity (14)</span>
+              <span className="text-base font-semibold text-gray-800">{t.schoolActivity} (14)</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">#14</span>
             </div>
           </div>
@@ -218,7 +217,7 @@ export const HomePage: React.FC = () => {
               <img src="http://localhost:8080/images/other/picture16.jpg" alt="Photo 15" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex items-center justify-between bg-white">
-              <span className="text-base font-semibold text-gray-800">School Activity (15)</span>
+              <span className="text-base font-semibold text-gray-800">{t.schoolActivity} (15)</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">#15</span>
             </div>
           </div>
@@ -229,7 +228,7 @@ export const HomePage: React.FC = () => {
               <img src="http://localhost:8080/images/other/picture17.jpg" alt="Photo 16" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex items-center justify-between bg-white">
-              <span className="text-base font-semibold text-gray-800">School Activity (16)</span>
+              <span className="text-base font-semibold text-gray-800">{t.schoolActivity} (16)</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">#16</span>
             </div>
           </div>
@@ -240,7 +239,7 @@ export const HomePage: React.FC = () => {
               <img src="http://localhost:8080/images/other/picture18.jpg" alt="Photo 17" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex items-center justify-between bg-white">
-              <span className="text-base font-semibold text-gray-800">School Activity (17)</span>
+              <span className="text-base font-semibold text-gray-800">{t.schoolActivity} (17)</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">#17</span>
             </div>
           </div>
@@ -251,7 +250,7 @@ export const HomePage: React.FC = () => {
               <img src="http://localhost:8080/images/other/picture19.jpg" alt="Photo 18" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex items-center justify-between bg-white">
-              <span className="text-base font-semibold text-gray-800">School Activity (18)</span>
+              <span className="text-base font-semibold text-gray-800">{t.schoolActivity} (18)</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">#18</span>
             </div>
           </div>
@@ -262,7 +261,7 @@ export const HomePage: React.FC = () => {
               <img src="http://localhost:8080/images/other/picture20.jpg" alt="Photo 19" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             </div>
             <div className="p-5 flex items-center justify-between bg-white">
-              <span className="text-base font-semibold text-gray-800">School Activity (19)</span>
+              <span className="text-base font-semibold text-gray-800">{t.schoolActivity} (19)</span>
               <span className="text-xs bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full">#19</span>
             </div>
           </div>

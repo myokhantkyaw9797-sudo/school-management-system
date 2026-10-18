@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useAcademicYearStore } from '../academic-year/store/useAcademicYearStore';
 import { useAuthStore } from '../auth/store/useAuthStore';
+import { useLanguageStore } from '../store/useLanguageStore';
+import { translations } from '../utils/translations';
 import { saveOrUpdateExamMark, getMarksByEnrollment } from './examMarkApi';
 import axios from 'axios';
 
@@ -32,6 +34,8 @@ interface StudentEnrollment {
 export const ExamMarkPage: React.FC = () => {
   const { selectedYearId } = useAcademicYearStore();
   const { token } = useAuthStore();
+  const { language } = useLanguageStore();
+  const t = translations[language];
 
   const [grades, setGrades] = useState<Grade[]>([]);
   const [selectedGradeId, setSelectedGradeId] = useState<string>('');
@@ -56,7 +60,6 @@ export const ExamMarkPage: React.FC = () => {
     return name.toUpperCase();
   };
 
-  // 🟢 ၁။ Academic Years စာရင်းခေါ်ယူခြင်း (လက်ရှိနှစ် ဟုတ်မဟုတ် စစ်ဆေးရန်)
   useEffect(() => {
     const fetchAcademicYears = async () => {
       try {
@@ -73,7 +76,6 @@ export const ExamMarkPage: React.FC = () => {
     }
   }, [token]);
 
-  // လက်ရှိရွေးချယ်ထားသော နှစ်သည် လက်ရှိနှစ် (Current Year) ဟုတ်မဟုတ် စစ်ဆေးခြင်း
   const currentYearObj = academicYearsList.find((y: any) => y.id === selectedYearId);
   const isCurrentYear = currentYearObj ? Boolean(currentYearObj.isCurrent) : true;
 
@@ -229,19 +231,19 @@ export const ExamMarkPage: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 overflow-x-auto">
-      <h2 className="text-xl font-bold text-emerald-900 mb-4">Exam Marks Management</h2>
+      <h2 className="text-xl font-bold text-emerald-900 mb-4">{language === 'mm' ? 'စာမေးပွဲအမှတ်များ စီမံခန့်ခွဲမှု' : 'Exam Marks Management'}</h2>
 
       <div className="bg-white p-4 rounded-xl shadow-md border border-emerald-100">
         
         <div className="flex flex-wrap justify-between items-center mb-6 px-2 py-2 text-sm font-bold text-emerald-900 border-b border-gray-200 gap-4">
           <div className="flex items-center space-x-2">
-            <span className="text-gray-600 font-semibold">Grade:</span>
+            <span className="text-gray-600 font-semibold">{language === 'mm' ? 'အတန်း:' : 'Grade:'}</span>
             <select
               value={selectedGradeId}
               onChange={(e) => setSelectedGradeId(e.target.value)}
               className="bg-emerald-50 text-emerald-900 border border-emerald-300 rounded px-2 py-1 text-sm font-semibold focus:outline-none focus:border-emerald-600"
             >
-              <option value="">-- Select Grade --</option>
+              <option value="">{language === 'mm' ? '-- အတန်းရွေးပါ --' : '-- Select Grade --'}</option>
               {grades.map(grade => (
                 <option key={grade.id} value={grade.id}>{grade.name || grade.gradeName}</option>
               ))}
@@ -249,7 +251,7 @@ export const ExamMarkPage: React.FC = () => {
           </div>
 
           <div className="flex items-center space-x-2">
-            <span className="text-gray-600 font-semibold">Exam Month:</span>
+            <span className="text-gray-600 font-semibold">{language === 'mm' ? 'စာမေးပွဲလ:' : 'Exam Month:'}</span>
             <select
               value={examMonth}
               onChange={(e) => setExamMonth(e.target.value)}
@@ -267,10 +269,10 @@ export const ExamMarkPage: React.FC = () => {
           <table className="w-full text-left border-collapse min-w-max text-xs">
             <thead>
               <tr className="bg-emerald-800 text-white uppercase tracking-wider text-center">
-                <th className="py-2.5 px-2 border border-emerald-700 w-10">No</th>
-                <th className="py-2.5 px-3 border border-emerald-700">Student Code</th>
-                <th className="py-2.5 px-3 border border-emerald-700">Roll No</th>
-                <th className="py-2.5 px-4 border border-emerald-700 text-left">Student Name</th>
+                <th className="py-2.5 px-2 border border-emerald-700 w-10">{language === 'mm' ? 'စဉ်' : 'No'}</th>
+                <th className="py-2.5 px-3 border border-emerald-700">{language === 'mm' ? 'ကျောင်းသားကုဒ်' : 'Student Code'}</th>
+                <th className="py-2.5 px-3 border border-emerald-700">{language === 'mm' ? 'ခုံအမှတ်' : 'Roll No'}</th>
+                <th className="py-2.5 px-4 border border-emerald-700 text-left">{language === 'mm' ? 'ကျောင်းသားအမည်' : 'Student Name'}</th>
                 
                 {subjects.map(sub => (
                   <th key={sub.id} className="py-2.5 px-2 border border-emerald-700 w-20 text-center font-bold">
@@ -278,9 +280,9 @@ export const ExamMarkPage: React.FC = () => {
                   </th>
                 ))}
 
-                <th className="py-2.5 px-2 border border-emerald-700 w-16 bg-emerald-900">Total</th>
-                <th className="py-2.5 px-2 border border-emerald-700 w-20">Result</th>
-                <th className="py-2.5 px-2 border border-emerald-700 w-20">Action</th>
+                <th className="py-2.5 px-2 border border-emerald-700 w-16 bg-emerald-900">{language === 'mm' ? 'စုစုပေါင်း' : 'Total'}</th>
+                <th className="py-2.5 px-2 border border-emerald-700 w-20">{language === 'mm' ? 'ရလဒ်' : 'Result'}</th>
+                <th className="py-2.5 px-2 border border-emerald-700 w-20">{language === 'mm' ? 'လုပ်ဆောင်ချက်' : 'Action'}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
@@ -332,7 +334,6 @@ export const ExamMarkPage: React.FC = () => {
                       {getPassFailStatus(st.id)}
                     </td>
 
-                    {/* 🟢 နှစ်ဟောင်းဖြစ်ပါက Save ခလုတ်မပေါ်ဘဲ View Only ဟုသာပြမည် */}
                     <td className="py-2 px-2 border border-gray-200">
                       {isCurrentYear ? (
                         <button

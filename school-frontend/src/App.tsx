@@ -8,9 +8,9 @@ import { Header } from './public-page/Header';
 import { HomePage } from './public-page/HomePage';
 
 import { TeacherPage } from './teacher/page/TeacherPage';
-import StudentPage from './student/page/StudentPage'; 
+import StudentPage from './student/pages/StudentPage'; 
 import { ExamMarkPage } from './exam-mark/ExamMarkPage';
-
+import { StudentProfileForm } from './student/components/StudentProfileForm';
 function App() {
   const { checkAuth, isAuthenticated } = useAuthStore();
 
@@ -34,6 +34,7 @@ function App() {
             <Route path="/teacher/dashboard" element={<TeacherPage />} />
             <Route path="/students" element={<StudentPage />} />
             <Route path="/exam-marks" element={<ExamMarkPage />} /> 
+            <Route path="/student-profile" element={<StudentProfileForm />} />
           </Route>
 
           {/* Fallback Redirect */}
